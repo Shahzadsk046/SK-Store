@@ -1,11 +1,13 @@
 // import Home from "./Pages/Home";
-import ProductList from "./Pages/ProductList";
+// import ProductList from "./Pages/ProductList";
+import Product from "./Pages/Product";
 
 const App = () => {
   return (
     <>
       {/* <Home /> */}
-      <ProductList />
+      {/* <ProductList /> */}
+      <Product/>
     </>
   );
 };
