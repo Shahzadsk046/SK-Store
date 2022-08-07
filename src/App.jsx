@@ -4,7 +4,7 @@ import ProductList from "./Pages/ProductList";
 const App = () => {
   return (
     <>
-      {/* <Home /> */}
+      <Home />
       <ProductList />
     </>
   );
