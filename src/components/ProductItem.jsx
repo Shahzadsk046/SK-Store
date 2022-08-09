@@ -30,10 +30,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e9eff1;
+  background-color: #f0fcff;
   position: relative;
-  border: 2px solid rgba(0,0,0,0.3);
-  border-radius: 10px;
+  /* border: 2px solid rgba(0,0,0,0.3); */
+  /* border-radius: 10px; */
 
   &:hover ${Info} {
     opacity: 1;
