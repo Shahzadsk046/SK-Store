@@ -2,7 +2,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
 import { slideritems } from "../data";
-import { xsmall, medium, small } from "../responsive";
+import { xsmall, medium, small, large } from "../responsive";
 // import Slide1 from "../images/slide1.jpg";
 
 const Container = styled.div`
@@ -11,9 +11,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${xsmall({ display: "none" })}
-  /* ${small({ height: "100vh" })} */
+  ${large({ height: "50vh" })}
   ${medium({ height: "40vh", width: "100%" })}
+  ${xsmall({ display: "none" })}
 `;
 
 const Arrow = styled.div`
@@ -40,7 +40,6 @@ const Wrapper = styled.div`
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
-  
   ${small({height: "40vh"})}
 `;
 
@@ -59,6 +58,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   height: 80%;
+  ${large({ width: "55vw", height: "50vh" })}
   ${medium({ width: "55vw", height: "100%" })}
   ${small({height: "100%"})}
 `;
@@ -66,7 +66,8 @@ const Image = styled.img`
 const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
-  ${small({width: "100%", height: "100%"})}
+  ${large({width: "100%", height: "100%"})}
+  /* ${small({width: "100%", height: "100%"})} */
 `;
 
 const Title = styled.h1`
