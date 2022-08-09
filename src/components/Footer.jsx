@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Facebook, Instagram, Twitter, GitHub, Room, Phone, MailOutline } from "@material-ui/icons";
 import Payment1 from '../images/payment2.png';
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -55,6 +55,7 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  ${tablet({flexDirection: "column"})}
 `;
 
 const ListItem = styled.li`
