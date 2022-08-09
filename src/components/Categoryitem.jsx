@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { xsmall, medium } from "../responsive";
+import { xsmall, medium, small } from "../responsive";
 
 const Container = styled.div`
   flex: 1;
@@ -14,8 +14,9 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  ${xsmall({ height: "20vh" })}
   ${medium({ height: "100%", width:"100%" })}
+  ${small({ height: "50vh" })}
+  ${xsmall({ height: "20vh" })}
 `;
 
 const Info = styled.div`
@@ -28,14 +29,14 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  ${medium({textAlign: "center"})}
+  text-align: center;
 `;
 
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
-  /* font-size: 1.6rem; */
   ${medium({fontSize: "1.5rem"})}
+  ${small({fontSize: "2rem"})}
 `;
 
 const Button = styled.button`

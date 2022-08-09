@@ -2,7 +2,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
 import { slideritems } from "../data";
-import { xsmall, medium } from "../responsive";
+import { xsmall, medium, small } from "../responsive";
 // import Slide1 from "../images/slide1.jpg";
 
 const Container = styled.div`
@@ -12,6 +12,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   ${xsmall({ display: "none" })}
+  /* ${small({ height: "100vh" })} */
   ${medium({ height: "40vh", width: "100%" })}
 `;
 
@@ -39,6 +40,8 @@ const Wrapper = styled.div`
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
+  
+  ${small({height: "40vh"})}
 `;
 
 const Slide = styled.div`
@@ -57,15 +60,18 @@ const ImgContainer = styled.div`
 const Image = styled.img`
   height: 80%;
   ${medium({ width: "55vw", height: "100%" })}
+  ${small({height: "100%"})}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
+  ${small({width: "100%", height: "100%"})}
 `;
 
 const Title = styled.h1`
   font-size: 70px;
+  ${small({fontSize: "40px"})}
 `;
 
 const Desc = styled.p`
@@ -73,6 +79,7 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+  ${small({fontSize: "16px", margin:"20px 0px"})}
 `;
 
 const Button = styled.button`

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { categories } from "../data";
-import { xsmall } from "../responsive";
+import { small, xsmall } from "../responsive";
 import Categoryitem from "./Categoryitem";
 
 const Container = styled.div`
@@ -9,6 +9,7 @@ const Container = styled.div`
     padding: 20px;
     justify-content: space-between;
   ${xsmall({padding: "0px", flexDirection:"column"})}
+  ${small({padding: "20px 0px", flexDirection:"column"})}
 `;
 
 const Categories = () => {

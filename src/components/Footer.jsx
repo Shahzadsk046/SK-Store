@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Facebook, Instagram, Twitter, GitHub, Room, Phone, MailOutline } from "@material-ui/icons";
 import Payment1 from '../images/payment2.png';
-import { xsmall, medium } from "../responsive";
+import { xsmall, medium, small } from "../responsive";
 
 const Container = styled.div`
   display: flex;
-  ${xsmall({flexDirection: "column"})}
+  ${small({flexDirection: "column"})}
+  /* ${xsmall({flexDirection: "column"})} */
 `;
 
 const Left = styled.div`
@@ -56,6 +57,7 @@ const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   ${medium({flexDirection: "column"})}
+  ${small({flexDirection: "row"})}
 `;
 
 const ListItem = styled.li`
@@ -66,7 +68,8 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
-  ${xsmall({backgroundColor: "#fff8f8"})}
+  ${small({backgroundColor: "#fff8f8"})}
+  /* ${xsmall({backgroundColor: "#fff8f8"})} */
 `;
 
 const ContactItem = styled.div`
