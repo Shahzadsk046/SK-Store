@@ -14,7 +14,7 @@ mongoose
   });
 
 app.use(express.json());
-app.use("/api/user", userRoute);
+app.use("/api/users", userRoute);
 // app.get("/api/test", () => console.log("Test is Successful!"));
 
 app.listen(process.env.PORT || 3000, () => {
