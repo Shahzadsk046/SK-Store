@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import bg from "../images/bg.jpg";
+import { large } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  ${large({width: "75%"})}
 `;
 
 const Title = styled.h1`
