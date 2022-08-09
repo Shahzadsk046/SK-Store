@@ -5,11 +5,13 @@ import Footer from "../components/Footer";
 import SHOES1 from "../images/shoes1.png";
 import SHIRT2 from "../images/shirt2.png";
 import { Add, Remove } from "@material-ui/icons";
+import { medium, small, xsmall } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
+  ${small({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -34,7 +36,9 @@ const TopButton = styled.button`
   color: ${(props) => props.type === "filled" && "white"};
 `;
 
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+  ${small({ display: "none" })}
+`;
 
 const TopText = styled.span`
   text-decoration: underline;
@@ -45,6 +49,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${medium({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -54,6 +59,7 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  ${xsmall({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -102,11 +108,13 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
+  ${small({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  ${small({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -182,9 +190,9 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
                   <Remove />
+                  <ProductAmount>2</ProductAmount>
+                  <Add />
                 </ProductAmountContainer>
                 <ProductPrice>$ 30</ProductPrice>
               </PriceDetail>
@@ -208,9 +216,9 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
                   <Remove />
+                  <ProductAmount>1</ProductAmount>
+                  <Add />
                 </ProductAmountContainer>
                 <ProductPrice>$ 20</ProductPrice>
               </PriceDetail>
