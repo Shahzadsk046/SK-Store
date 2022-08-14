@@ -10,6 +10,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Success from "./Pages/Success";
 
 const App = () => {
   const user = true;
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/products/:category" element={<ProductList />} />
         <Route exact path="/product/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/success" element={<Success />} />
         <Route
           exact
           path="/login"
