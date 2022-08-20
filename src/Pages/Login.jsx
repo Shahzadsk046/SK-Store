@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import bg from "../images/bglogin.webp";
-import {large} from "../responsive";
+import { large } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;
@@ -21,7 +23,7 @@ const Wrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: white;
-  ${large({width: "75%"})}
+  ${large({ width: "75%" })}
 `;
 
 const Title = styled.h1`
@@ -56,17 +58,47 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled {
+    color: cadetblue;
+    cursor: not-allowed;
+  }
+`;
+
+const Error = styled.span`
+  color: red;
 `;
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="Username" />
-          <Input placeholder="Password" />
-          <Button>LOGIN</Button>
+          <Input
+            placeholder="Username"
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {/* <Button onClick={handleClick} disabled={isFetching}> */}
+          <Button onClick={handleClick} disabled={isFetching}>
+            LOGIN
+          </Button>
+          {error && <Error>Something went wrong...</Error>}
           <Link>DO NOT YOU REMEMBER YOUR PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>
