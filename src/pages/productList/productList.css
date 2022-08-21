@@ -2,6 +2,10 @@
     flex: 4;
 }
 
+.pTitle{
+    margin: 10px;
+}
+
 .productListItem{
     display: flex;
     align-items: center;
