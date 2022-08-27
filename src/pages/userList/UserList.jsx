@@ -4,18 +4,30 @@ import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUsers } from "../../redux/apiCalls";
 
 export default function UserList() {
+  const dispatch = useDispatch();
   const [data, setData] = useState(userRows);
 
+  const users = useSelector((state) => state.userdata.users);
+  console.log(users)
+
+  useEffect(() => {
+    getUsers(dispatch);
+  }, [dispatch]);
+
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+      setData(data.filter((item) => item.id !== id));
+    // deleteUsers(id, dispatch);
   };
-  
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
-      field: "user",
+      field: "username",
       headerName: "User",
       width: 200,
       renderCell: (params) => {
@@ -29,15 +41,15 @@ export default function UserList() {
     },
     { field: "email", headerName: "Email", width: 200 },
     {
-      field: "status",
-      headerName: "Status",
+      field: "isAdmin",
+      headerName: "Admin",
       width: 120,
     },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
+    // {
+    //   field: "transaction",
+    //   headerName: "Transaction Volume",
+    //   width: 160,
+    // },
     {
       field: "action",
       headerName: "Action",
@@ -45,12 +57,12 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -61,9 +73,11 @@ export default function UserList() {
   return (
     <div className="userList">
       <DataGrid
-        rows={data}
+        // rows={users}
+        rows={users}
         disableSelectionOnClick
         columns={columns}
+        getRowId={(row) => row._id}
         pageSize={8}
         checkboxSelection
       />
