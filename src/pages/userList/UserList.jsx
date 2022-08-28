@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUsers } from "../../redux/apiCalls";
+import { deleteUsers, getUsers } from "../../redux/apiCalls";
 
 export default function UserList() {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ export default function UserList() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-      setData(data.filter((item) => item.id !== id));
-    // deleteUsers(id, dispatch);
+      // setData(data.filter((item) => item.id !== id));
+    deleteUsers(id, dispatch);
   };
 
   const columns = [

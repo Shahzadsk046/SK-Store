@@ -3,9 +3,9 @@ import {
   // addUserFailure,
   // addUserStart,
   // addUserSuccess,
-  // deleteUserFailure,
-  // deleteUserStart,
-  // deleteUserSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
   getUserFailure,
   getUserStart,
   getUserSuccess,
@@ -92,15 +92,15 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-// export const deleteUsers = async (id, dispatch) => {
-//   dispatch(deleteUserStart());
-//   try {
-//     await userRequest.delete(`/users/${id}`);
-//     dispatch(deleteUserSuccess(id));
-//   } catch (err) {
-//     dispatch(deleteUserFailure());
-//   }
-// };
+export const deleteUsers = async (id, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+    await userRequest.delete(`/users/${id}`);
+    dispatch(deleteUserSuccess(id));
+  } catch (err) {
+    dispatch(deleteUserFailure());
+  }
+};
 
 // export const updateUsers = async (id, user, dispatch) => {
 //   console.log(id, user, dispatch);

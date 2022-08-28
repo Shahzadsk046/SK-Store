@@ -23,22 +23,22 @@ const usersReducer = createSlice({
       state.error = true;
     },
 
-    // // DELETE USER
-    // deleteUserStart: (state) => {
-    //   state.isFetching = true;
-    //   state.error = false;
-    // },
-    // deleteUserSuccess: (state, action) => {
-    //   state.isFetching = false;
-    //   state.users.splice(
-    //     state.users.findIndex((item) => item._id === action.payload),
-    //     1
-    //   );
-    // },
-    // deleteUserFailure: (state) => {
-    //   state.isFetching = false;
-    //   state.error = true;
-    // },
+    // DELETE USER
+    deleteUserStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    deleteUserSuccess: (state, action) => {
+      state.isFetching = false;
+      state.users.splice(
+        state.users.findIndex((item) => item._id === action.payload),
+        1
+      );
+    },
+    deleteUserFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
 
     // // UPDATE USER
     // updateUserStart: (state) => {
@@ -76,9 +76,9 @@ export const {
   getUserStart,
   getUserSuccess,
   getUserFailure,
-  // deleteUserStart,
-  // deleteUserSuccess,
-  // deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
   // updateUserStart,
   // updateUserSuccess,
   // updateUserFailure,
