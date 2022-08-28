@@ -39,7 +39,7 @@ function App() {
               <Route exact path="/products" element={<ProductList />} />
               <Route exact path="/product/:productId" element={<Product />} />
               <Route exact path="/newproduct" element={<NewProduct />} />
-              <Route path="/*" element="404 Not Found"/>
+              <Route path="*" element="404 Not Found"/>
             </div>
           </>
         )}
