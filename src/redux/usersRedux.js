@@ -40,21 +40,21 @@ const usersReducer = createSlice({
       state.error = true;
     },
 
-    // // UPDATE USER
-    // updateUserStart: (state) => {
-    //   state.isFetching = true;
-    //   state.error = false;
-    // },
-    // updateUserSuccess: (state, action) => {
-    //   state.isFetching = false;
-    //   state.users[
-    //     state.users.findIndex((item) => item._id === action.payload.id)
-    //   ] = action.payload.user;
-    // },
-    // updateUserFailure: (state) => {
-    //   state.isFetching = false;
-    //   state.error = true;
-    // },
+    // UPDATE USER
+    updateUserStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    updateUserSuccess: (state, action) => {
+      state.isFetching = false;
+      state.users[
+        state.users.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.user;
+    },
+    updateUserFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
     
     // ADD USER
     addUserStart: (state) => {
@@ -79,9 +79,9 @@ export const {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  // updateUserStart,
-  // updateUserSuccess,
-  // updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
   addUserStart,
   addUserSuccess,
   addUserFailure,

@@ -134,6 +134,15 @@ export default function NewUser() {
           />
         </div>
         <div className="newUserItem">
+          <label>Date of Birth</label>
+          <input
+            name="dob"
+            type="date"
+            placeholder="01/01/1990"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="newUserItem">
           <label>Address</label>
           <input
             name="address"

@@ -9,9 +9,9 @@ import {
   getUserFailure,
   getUserStart,
   getUserSuccess,
-  // updateUserFailure,
-  // updateUserStart,
-  // updateUserSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
 } from "./usersRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
@@ -102,18 +102,18 @@ export const deleteUsers = async (id, dispatch) => {
   }
 };
 
-// export const updateUsers = async (id, user, dispatch) => {
-//   console.log(id, user, dispatch);
-//   dispatch(updateUserStart());
-//   try {
-//     const res = await userRequest.put(`/users/${id}`, user);
-//     console.log(res.data);
-//     // dispatch(updateUserSuccess({ id, user }));
-//     dispatch(updateUserSuccess(res.data._id, res.data));
-//   } catch (err) {
-//     dispatch(updateUserFailure());
-//   }
-// };
+export const updateUsers = async (id, user, dispatch) => {
+  console.log(id, user, dispatch);
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data);
+    // dispatch(updateUserSuccess({ id, user }));
+    dispatch(updateUserSuccess(res.data._id, res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
+  }
+};
 
 export const addUsers = async (user, dispatch) => {
   dispatch(addUserStart());
