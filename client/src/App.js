@@ -5,8 +5,8 @@ import Home from "./pages/home/Home";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
   Routes,
+  Navigate,
 } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login">{isAdmin ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/login">{isAdmin ? <Navigate to="/" replace /> : <Login />}</Route>
         {isAdmin && (
           <>
             <Topbar />
