@@ -13,14 +13,14 @@ export default function UserList() {
   // const [data, setData] = useState(userRows);
 
   const users = useSelector((state) => state.userdata.users);
-  console.log(users)
+  console.log(users);
 
   useEffect(() => {
     getUsers(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-      // setData(data.filter((item) => item.id !== id));
+    // setData(data.filter((item) => item.id !== id));
     deleteUsers(id, dispatch);
   };
 
@@ -33,7 +33,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
+            <img className="userListImg" src={params.row.img} alt="" />
             {params.row.username}
           </div>
         );
@@ -72,6 +72,12 @@ export default function UserList() {
 
   return (
     <div className="userList">
+      <div className="titleContainer">
+        <h1 className="userTitle">User List</h1>
+        <Link to="/newUser">
+          <button className="addUserButton">Create New User</button>
+        </Link>
+      </div>
       <DataGrid
         // rows={users}
         rows={users}

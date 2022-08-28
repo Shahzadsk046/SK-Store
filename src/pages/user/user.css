@@ -10,7 +10,8 @@
 }
 
 .userAddButton {
-  width: 80px;
+  min-width: 80px;
+  width: 100%;
   border: none;
   padding: 5px;
   background-color: teal;

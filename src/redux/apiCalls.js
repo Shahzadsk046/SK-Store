@@ -1,8 +1,8 @@
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 import {
-  // addUserFailure,
-  // addUserStart,
-  // addUserSuccess,
+  addUserFailure,
+  addUserStart,
+  addUserSuccess,
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
@@ -115,12 +115,12 @@ export const deleteUsers = async (id, dispatch) => {
 //   }
 // };
 
-// export const addUsers = async (user, dispatch) => {
-//   dispatch(addUserStart());
-//   try {
-//     const res = await userRequest.post(`/users/`, user);
-//     dispatch(addUserSuccess(res.data));
-//   } catch (err) {
-//     dispatch(addUserFailure());
-//   }
-// };
+export const addUsers = async (user, dispatch) => {
+  dispatch(addUserStart());
+  try {
+    const res = await userRequest.post(`/users/`, user);
+    dispatch(addUserSuccess(res.data));
+  } catch (err) {
+    dispatch(addUserFailure());
+  }
+};

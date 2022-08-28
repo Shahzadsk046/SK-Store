@@ -56,19 +56,19 @@ const usersReducer = createSlice({
     //   state.error = true;
     // },
     
-    // // ADD USER
-    // addUserStart: (state) => {
-    //   state.isFetching = true;
-    //   state.error = false;
-    // },
-    // addUserSuccess: (state, action) => {
-    //   state.isFetching = false;
-    //   state.users.push(action.payload);
-    // },
-    // addUserFailure: (state) => {
-    //   state.isFetching = false;
-    //   state.error = true;
-    // },
+    // ADD USER
+    addUserStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    addUserSuccess: (state, action) => {
+      state.isFetching = false;
+      state.users.push(action.payload);
+    },
+    addUserFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -82,9 +82,9 @@ export const {
   // updateUserStart,
   // updateUserSuccess,
   // updateUserFailure,
-  // addUserStart,
-  // addUserSuccess,
-  // addUserFailure,
+  addUserStart,
+  addUserSuccess,
+  addUserFailure,
 } = usersReducer.actions;
 
 export default usersReducer.reducer;
