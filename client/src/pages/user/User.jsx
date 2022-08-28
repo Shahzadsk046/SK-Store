@@ -14,7 +14,7 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import app from "../../firebase";
 import { updateUsers } from "../../redux/apiCalls";
 import "./user.css";
@@ -39,7 +39,7 @@ export default function User() {
     });
   };
 
-  let history = useHistory();
+  let history = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
     console.log(file);
@@ -91,7 +91,7 @@ export default function User() {
           console.log(userID);
           console.log(user._id);
           console.log(user);
-          history.push(`/users/`);
+          history(`/users/`);
         });
       }
     );
