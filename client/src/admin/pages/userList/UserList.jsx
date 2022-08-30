@@ -74,7 +74,7 @@ export default function UserList() {
     <div className="userList">
       <div className="titleContainer">
         <h1 className="userTitle">User List</h1>
-        <Link to="/newUser">
+        <Link to="https://sk-store.netlify.app/newUser">
           <button className="addUserButton">Create New User</button>
         </Link>
       </div>

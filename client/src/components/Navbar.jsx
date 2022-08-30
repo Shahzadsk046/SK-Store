@@ -90,7 +90,7 @@ const Navbar = () => {
                 <Right>
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
-                    <Link to="/cart">
+                    <Link to="https://sk-store.netlify.app/cart">
                         <MenuItem>
                             <Badge badgeContent={quantity} color="primary">
                                 <ShoppingCartOutlined/>

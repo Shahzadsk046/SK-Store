@@ -4,6 +4,7 @@ import Product from "./Pages/Product";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
+import * as Admin from "./admin/App"
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,25 +15,33 @@ import Success from "./Pages/Success";
 import {useSelector} from "react-redux";
 
 const App = () => {
+  // const isAdmin = JSON.parse(
+  //   JSON.parse(localStorage.getItem("persist:root")).user
+  // ).currentUser.isAdmin;
+  const isAdmin = useSelector(state => state.user.currentUser.isAdmin);
   const user = useSelector(state => state.user.currentUser);
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/products/:category" element={<ProductList />} />
-        <Route exact path="/product/:id" element={<Product />} />
-        <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/success" element={<Success />} />
+        {isAdmin ? <Route exact path="https://sk-store.netlify.app/admin" element={<Admin />} /> :(
+          <>
+        <Route exact path="https://sk-store.netlify.app/" element={<Home />} />
+        <Route exact path="https://sk-store.netlify.app/products/:category" element={<ProductList />} />
+        <Route exact path="https://sk-store.netlify.app/product/:id" element={<Product />} />
+        <Route exact path="https://sk-store.netlify.app/cart" element={<Cart />} />
+        <Route exact path="https://sk-store.netlify.app/success" element={<Success />} />
         <Route
           exact
-          path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
-        />
+          path="https://sk-store.netlify.app/login"
+          element={user ? <Navigate to="https://sk-store.netlify.app/" replace /> : <Login />}
+          />
         <Route
           exact
-          path="/register"
-          element={user ? <Navigate to="/" replace /> : <Register />}
-        />
+          path="https://sk-store.netlify.app/register"
+          element={user ? <Navigate to="https://sk-store.netlify.app/" replace /> : <Register />}
+          />
+          </>
+        ) }
       </Routes>
       {/* <Home /> */}
       {/* <ProductList /> */}

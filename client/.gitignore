@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 node_modules
+/public_1
+/public_1 (2)
+public_1.env
+
 
 # testing
 /coverage
