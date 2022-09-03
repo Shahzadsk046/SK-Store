@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { categories } from "../data";
+import { categories } from "../../data";
 import { small, xsmall } from "../../responsive";
 import Categoryitem from "./Categoryitem";
 

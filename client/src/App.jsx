@@ -26,43 +26,73 @@ const App = () => {
   const user = useSelector((state) => state.user.currentUser);
 
   return (
-    <Routes>
+    <>
       {isAdmin ? (
         <>
           <Topbar />
           <div className="container">
             <Sidebar />
-            <Route exact path="/" element={<AdminHome />} />
-            <Route path="/users" element={<AdminUserList />} />
-            <Route path="/user/:userId" element={<AdminUser />} />
-            <Route path="/newUser" element={<AdminNewUser />} />
-            <Route path="/products" element={<AdminProductList />} />
-            <Route path="/product/:productId" element={<AdminProduct />} />
-            <Route path="/newproduct" element={<AdminNewProduct />} />
+            <Routes>
+              <Route exact path="/" element={<AdminHome />} />
+              <Route path="/users" element={<AdminUserList />} />
+              <Route path="/user/:userId" element={<AdminUser />} />
+              <Route path="/newUser" element={<AdminNewUser />} />
+              <Route path="/products" element={<AdminProductList />} />
+              <Route path="/product/:productId" element={<AdminProduct />} />
+              <Route path="/newproduct" element={<AdminNewProduct />} />
+              <Route
+                exact
+                path="/login"
+                element={user ? <Navigate to="/" replace /> : <Login />}
+              />
+              <Route
+                exact
+                path="/register"
+                element={user ? <Navigate to="/" replace /> : <Register />}
+              />
+            </Routes>
           </div>
         </>
       ) : (
         <>
           <div className="container">
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/products/:category" element={<ProductList />} />
-            <Route exact path="/product/:id" element={<Product />} />
-            <Route exact path="/cart" element={<Cart />} />
-            <Route exact path="/success" element={<Success />} />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route
+                exact
+                path="/products/:category"
+                element={<ProductList />}
+              />
+              <Route exact path="/product/:id" element={<Product />} />
+              <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/success" element={<Success />} />
+              <Route
+                exact
+                path="/login"
+                element={user ? <Navigate to="/" replace /> : <Login />}
+              />
+              <Route
+                exact
+                path="/register"
+                element={user ? <Navigate to="/" replace /> : <Register />}
+              />
+            </Routes>
           </div>
         </>
       )}
-      <Route
-        exact
-        path="/login"
-        element={user ? <Navigate to="/" replace /> : <Login />}
-      />
-      <Route
-        exact
-        path="/register"
-        element={user ? <Navigate to="/" replace /> : <Register />}
-      />
-    </Routes>
+      {/* <Routes>
+        <Route
+          exact
+          path="/login"
+          element={user ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          exact
+          path="/register"
+          element={user ? <Navigate to="/" replace /> : <Register />}
+        />
+      </Routes> */}
+    </>
   );
 };
 

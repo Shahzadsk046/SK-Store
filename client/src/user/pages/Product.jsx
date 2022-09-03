@@ -10,7 +10,7 @@ import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {publicRequest} from "../../requestMethods";
 import {useDispatch} from "react-redux";
-import {addProduct} from "../../redux/apiCalls";
+import {addProduct} from "../../redux/cartRedux";
 
 const Container = styled.div``;
 

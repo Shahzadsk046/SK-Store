@@ -1,4 +1,4 @@
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
@@ -93,7 +93,7 @@ export default function AdminProduct() {
     setColor(value);
     };
 
-  let history = useHistory();
+  let history = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
     console.log(file)
@@ -147,7 +147,7 @@ export default function AdminProduct() {
           console.log(productId);
           console.log(product._id);
           console.log(product);
-          history.push(`/products/`);
+          history(`/products/`);
         });
       }
     );
