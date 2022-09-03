@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -21,13 +22,19 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.get("/", (req,res) => res.send("Welcome to my API service"));
+// app.get("/", (req,res) => res.send("Welcome to my API service"));
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend Server is running");
