@@ -55,6 +55,19 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const Link = styled.a`
+  margin: 10px 0px;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+const Span = styled.span`
+  margin: 10px 0px;
+  font-size: 12px;
+  /* text-decoration: underline; */
+  cursor: pointer;
+`;
+
 const Register = () => {
   return (
     <Container>
@@ -73,6 +86,9 @@ const Register = () => {
           </Agreement>
           <Button>CREATE ACCOUNT</Button>
         </Form>
+        <Span>ALREADY HAVE AN ACCOUNT? 
+          &nbsp; &nbsp; &nbsp;<Link href="/login">CLICK HERE</Link>
+          </Span>
       </Wrapper>
     </Container>
   );

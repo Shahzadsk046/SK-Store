@@ -164,8 +164,10 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+  let cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+
+  console.log(cart)
 
   const navigate = useNavigate();
 
@@ -178,11 +180,11 @@ const Cart = () => {
       try {
         const res = await userRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: 10000,
-          // amount: cart.total * 100,
+          // amount: 10000,
+          amount: cart.total * 100,
         });
         console.log(res.data);
-        navigate("/success", {
+        navigate("/", {
           replace: true,
           data: res.data,
         });
@@ -191,7 +193,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate]);
+  }, [stripeToken, cart.total, navigate, cart]);
 
   return (
     <Container>
@@ -205,7 +207,18 @@ const Cart = () => {
             <TopText>Shopping Bag (2)</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <StripeCheckout
+            name="SK STORE"
+            image={LOGO}
+            billingAddress
+            shippingAddress
+            description={`Your total is $${cart.total}`}
+            amount={cart.total * 100}
+            token={onToken}
+            stripeKey={KEY}
+          >
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </StripeCheckout>
         </Top>
         <Bottom>
           <Info>

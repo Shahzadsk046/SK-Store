@@ -1,4 +1,11 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+} from "./userRedux";
 import {
   addUserFailure,
   addUserStart,
@@ -36,6 +43,16 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+  }
+};
+
+export const logout = async (dispatch, user) => {
+  dispatch(logoutStart());
+  try {
+    // const res = await publicRequest.post("/auth/logout", user);
+    dispatch(logoutSuccess(user));
+  } catch (err) {
+    dispatch(logoutFailure());
   }
 };
 

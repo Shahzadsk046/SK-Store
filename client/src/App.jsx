@@ -19,15 +19,21 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const isAdmin = JSON.parse(
-    JSON.parse(localStorage.getItem("persist:root")).user
-  ).currentUser.isAdmin;
-  // const isAdmin = useSelector(state => state.user.currentUser.isAdmin);
+  // const isAdmin = JSON.parse(
+  //   JSON.parse(localStorage.getItem("persist:root")).user
+  // ).currentUser.isAdmin;
+  const isAdmin = useSelector((state) => state.user.currentUser.isAdmin);
   const user = useSelector((state) => state.user.currentUser);
 
   return (
     <>
-      {isAdmin ? (
+      {!user ? (
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+        </Routes>
+      ) : isAdmin ? (
         <>
           <Topbar />
           <div className="container">
@@ -55,7 +61,7 @@ const App = () => {
         </>
       ) : (
         <>
-          <div className="container">
+          {/* <div className="container"> */}
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route
@@ -77,21 +83,9 @@ const App = () => {
                 element={user ? <Navigate to="/" replace /> : <Register />}
               />
             </Routes>
-          </div>
+          {/* </div> */}
         </>
       )}
-      {/* <Routes>
-        <Route
-          exact
-          path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
-        />
-        <Route
-          exact
-          path="/register"
-          element={user ? <Navigate to="/" replace /> : <Register />}
-        />
-      </Routes> */}
     </>
   );
 };
