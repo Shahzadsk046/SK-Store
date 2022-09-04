@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from "../../requestMethods";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const KEY =
   "pk_test_51LVFW7BLVVEbvQhO2Wpunjvyt5ZRqcjdjxQuz7mdXnZOfX2Wh6H7C1LgnQvZBS2V4FpV60cmdeXkfIK85wdAYmio002F0JoVUv";
@@ -175,6 +175,10 @@ const Cart = () => {
     setStripeToken(token);
   };
 
+  const handleClick = ()=>{
+    navigate("/",{replace:true})
+  }
+
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -202,7 +206,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={handleClick}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag (2)</TopText>
             <TopText>Your Wishlist (0)</TopText>
