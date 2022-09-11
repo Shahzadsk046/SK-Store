@@ -14,7 +14,7 @@ import {
   // Navigate,
   useNavigate,
 } from "react-router-dom";
-import { removeFromCart } from "../../redux/cartRedux";
+import { clearAllCart, removeFromCart } from "../../redux/cartRedux";
 
 const KEY =
   "pk_test_51LVFW7BLVVEbvQhO2Wpunjvyt5ZRqcjdjxQuz7mdXnZOfX2Wh6H7C1LgnQvZBS2V4FpV60cmdeXkfIK85wdAYmio002F0JoVUv";
@@ -243,6 +243,7 @@ const Cart = () => {
           amount: cart.total * 100,
         });
         console.log(res.data);
+        dispatch(clearAllCart());
         navigate("/", {
           replace: true,
           data: res.data,
@@ -252,7 +253,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate]);
+  }, [stripeToken, cart.total, navigate, dispatch]);
 
   return (
     <Container>
