@@ -180,29 +180,13 @@ const Button = styled.button`
 
 const Cart = () => {
   let cart = useSelector((state) => state.cart);
-  // let total = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
-  // let products = useSelector((state) => state.cart.products);
 
-  // var cartTotal = cart.total;
-  // const {quantity, ...others} = cart.products;
   let {
     products,
-    quantity,
-    // total
+    quantity
   } = cart;
   const [stripeToken, setStripeToken] = useState(null);
-  // const [pQuantity, setPQuantity] = useState(
-  //   products.map((product) => product.quantity)
-  // );
-  // cart.products.map((product)=>(
-  // ))
-  // setPQuantity(cart.quantity)
-  console.log(cart);
-  console.log(products);
-  console.log(quantity);
-  // console.log(total);
-  // console.log(cartTotal);
 
   const getTotal = () => {
     let totalQty = 0;
@@ -211,14 +195,8 @@ const Cart = () => {
       totalQty += item.quantity;
       totalPrice += item.price * item.quantity;
     });
-    // console.log(total)
-    // console.log(cartTotal)
-    console.log(cart.total)
-    // total = totalPrice;
     return { totalPrice, totalQty };
   };
-
-  // total = getTotal().totalPrice;
 
   const navigate = useNavigate();
 
@@ -242,23 +220,11 @@ const Cart = () => {
     dispatch(removeFromCart(productItem));
   };
 
-  // const handleChange = ({ target }) => {
-
-  //   // cart.products.map((product)=>(
-  //   //   setPQuantity({...quantity, [productQuantity] : product.quantity})
-  //   //   ))
-  //   setPQuantity({
-  //     ...quantity,
-  //     [target._id]: target.value
-  //   })
-  // }
-
   useEffect(() => {
     const makeRequest = async () => {
       try {
         const res = await userRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          // amount: 10000,
           amount: cart.total * 100,
         });
         console.log(res.data);
@@ -272,17 +238,7 @@ const Cart = () => {
       }
     };
 
-    // const handleDecrease = (product) => {
-    //   product.quantity > 1 && dispatch(decreaseCart(product));
-    // };
-
-    // const handleIncrease = (product) => {
-    //   dispatch(increaseCart(product));
-    // };
-
     stripeToken && makeRequest();
-    // handleDecrease()
-    // handleIncrease()
   }, [stripeToken, cart.total, navigate, dispatch]);
 
   return (
@@ -354,7 +310,6 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              {/* <SummaryItemPrice>$ {cart.total}</SummaryItemPrice> */}
               <SummaryItemPrice>$ {getTotal().totalPrice}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
