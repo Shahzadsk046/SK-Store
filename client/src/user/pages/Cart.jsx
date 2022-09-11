@@ -14,7 +14,12 @@ import {
   // Navigate,
   useNavigate,
 } from "react-router-dom";
-import { clearAllCart, removeFromCart } from "../../redux/cartRedux";
+import {
+  clearAllCart,
+  decreaseCart,
+  increaseCart,
+  removeFromCart,
+} from "../../redux/cartRedux";
 
 const KEY =
   "pk_test_51LVFW7BLVVEbvQhO2Wpunjvyt5ZRqcjdjxQuz7mdXnZOfX2Wh6H7C1LgnQvZBS2V4FpV60cmdeXkfIK85wdAYmio002F0JoVUv";
@@ -175,8 +180,11 @@ const Button = styled.button`
 
 const Cart = () => {
   let cart = useSelector((state) => state.cart);
+  // let total = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
   // let products = useSelector((state) => state.cart.products);
+
+  // var cartTotal = cart.total;
   // const {quantity, ...others} = cart.products;
   let {
     products,
@@ -193,6 +201,24 @@ const Cart = () => {
   console.log(cart);
   console.log(products);
   console.log(quantity);
+  // console.log(total);
+  // console.log(cartTotal);
+
+  const getTotal = () => {
+    let totalQty = 0;
+    let totalPrice = 0;
+    products.forEach((item) => {
+      totalQty += item.quantity;
+      totalPrice += item.price * item.quantity;
+    });
+    // console.log(total)
+    // console.log(cartTotal)
+    console.log(cart.total)
+    // total = totalPrice;
+    return { totalPrice, totalQty };
+  };
+
+  // total = getTotal().totalPrice;
 
   const navigate = useNavigate();
 
@@ -200,19 +226,12 @@ const Cart = () => {
     setStripeToken(token);
   };
 
-  const handleQuantity = (type) => {
-    // products.map((product) =>
-    //   // setPQuantity({
-    //   setPQuantity(product.quantity)
-    // );
-    //   ...quantity,
-    //   [type._id]: type.value
-    // })
-    if (type === "dec") {
-      products.quantity > 1 && (products.quantity -= 1);
-    } else {
-      products.quantity += 1;
-    }
+  const handleDecrease = (product) => {
+    product.quantity > 1 && dispatch(decreaseCart(product));
+  };
+
+  const handleIncrease = (product) => {
+    dispatch(increaseCart(product));
   };
 
   const handleClick = () => {
@@ -252,7 +271,18 @@ const Cart = () => {
         console.log(err);
       }
     };
+
+    // const handleDecrease = (product) => {
+    //   product.quantity > 1 && dispatch(decreaseCart(product));
+    // };
+
+    // const handleIncrease = (product) => {
+    //   dispatch(increaseCart(product));
+    // };
+
     stripeToken && makeRequest();
+    // handleDecrease()
+    // handleIncrease()
   }, [stripeToken, cart.total, navigate, dispatch]);
 
   return (
@@ -308,9 +338,9 @@ const Cart = () => {
                     <Delete />
                   </ProductClear>
                   <ProductAmountContainer>
-                    <Remove onClick={() => handleQuantity("dec")} />
+                    <Remove onClick={() => handleDecrease(product)} />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add onClick={() => handleQuantity("inc")} />
+                    <Add onClick={() => handleIncrease(product)} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}
@@ -324,7 +354,8 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              {/* <SummaryItemPrice>$ {cart.total}</SummaryItemPrice> */}
+              <SummaryItemPrice>$ {getTotal().totalPrice}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -336,7 +367,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>$ {getTotal().totalPrice}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
               name="SK STORE"
