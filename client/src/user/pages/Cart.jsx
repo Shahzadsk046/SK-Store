@@ -4,13 +4,17 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 // import SHOES1 from "../../images/shoes1.png";
 import LOGO from "../../images/logo.png";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Delete, Remove } from "@material-ui/icons";
 import { medium, small, xsmall } from "../../responsive";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from "../../requestMethods";
-import { Navigate, useNavigate } from "react-router-dom";
+import {
+  // Navigate,
+  useNavigate,
+} from "react-router-dom";
+import { removeFromCart } from "../../redux/cartRedux";
 
 const KEY =
   "pk_test_51LVFW7BLVVEbvQhO2Wpunjvyt5ZRqcjdjxQuz7mdXnZOfX2Wh6H7C1LgnQvZBS2V4FpV60cmdeXkfIK85wdAYmio002F0JoVUv";
@@ -113,6 +117,12 @@ const ProductAmountContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const ProductClear = styled.div`
+  font-size: 24px;
+  margin: 5px;
+  cursor: pointer;
+`;
+
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
@@ -165,9 +175,24 @@ const Button = styled.button`
 
 const Cart = () => {
   let cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  // let products = useSelector((state) => state.cart.products);
+  // const {quantity, ...others} = cart.products;
+  let {
+    products,
+    quantity,
+    // total
+  } = cart;
   const [stripeToken, setStripeToken] = useState(null);
-
-  console.log(cart)
+  // const [pQuantity, setPQuantity] = useState(
+  //   products.map((product) => product.quantity)
+  // );
+  // cart.products.map((product)=>(
+  // ))
+  // setPQuantity(cart.quantity)
+  console.log(cart);
+  console.log(products);
+  console.log(quantity);
 
   const navigate = useNavigate();
 
@@ -175,9 +200,39 @@ const Cart = () => {
     setStripeToken(token);
   };
 
-  const handleClick = ()=>{
-    navigate("/",{replace:true})
-  }
+  const handleQuantity = (type) => {
+    // products.map((product) =>
+    //   // setPQuantity({
+    //   setPQuantity(product.quantity)
+    // );
+    //   ...quantity,
+    //   [type._id]: type.value
+    // })
+    if (type === "dec") {
+      products.quantity > 1 && (products.quantity -= 1);
+    } else {
+      products.quantity += 1;
+    }
+  };
+
+  const handleClick = () => {
+    navigate("/", { replace: true });
+  };
+
+  const handleClear = (productItem) => {
+    dispatch(removeFromCart(productItem));
+  };
+
+  // const handleChange = ({ target }) => {
+
+  //   // cart.products.map((product)=>(
+  //   //   setPQuantity({...quantity, [productQuantity] : product.quantity})
+  //   //   ))
+  //   setPQuantity({
+  //     ...quantity,
+  //     [target._id]: target.value
+  //   })
+  // }
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -197,7 +252,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate, cart]);
+  }, [stripeToken, cart.total, navigate]);
 
   return (
     <Container>
@@ -208,7 +263,7 @@ const Cart = () => {
         <Top>
           <TopButton onClick={handleClick}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag (2)</TopText>
+            <TopText>Shopping Bag ({quantity})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <StripeCheckout
@@ -226,7 +281,7 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product, index) => (
+            {products.map((product, index) => (
               <Product key={index}>
                 <ProductDetail>
                   <Image src={product.img} />
@@ -244,10 +299,17 @@ const Cart = () => {
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
+                  <ProductClear
+                    onClick={() => {
+                      handleClear(product);
+                    }}
+                  >
+                    <Delete />
+                  </ProductClear>
                   <ProductAmountContainer>
-                    <Remove />
+                    <Remove onClick={() => handleQuantity("dec")} />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add />
+                    <Add onClick={() => handleQuantity("inc")} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}
